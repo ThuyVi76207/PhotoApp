@@ -1,12 +1,12 @@
-import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
+import { ErrorMessage } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Select from 'react-select';
-import { FormGroup, Label } from 'reactstrap';
+import { FormFeedback, FormGroup, Label } from 'reactstrap';
 
 SelectField.prototype = {
     field: PropTypes.object.isRequired,
-    // form: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired,
 
 
     label: PropTypes.string,
@@ -20,15 +20,17 @@ SelectField.defaultProps = {
     label: '',
     placeholder: '',
     disabled: false,
-    options: PHOTO_CATEGORY_OPTIONS,
+    options: [],
 }
 
 function SelectField(props) {
     const {
-        field,
+        field, form,
         options, label, placeholder, disabled
     } = props;
     const { name, value } = field //{...field} = {name, value, onChange, onBlur}
+    const { errors, touched } = form;
+    const showError = errors[name] && touched[name]
 
     const selectionOption = options.find(option => option.value === value);
     const handleSelectOptionChange = (selectOption) => {
@@ -57,7 +59,10 @@ function SelectField(props) {
                 isDisabled={disabled}
                 options={options}
 
+                className={showError ? 'is-invalid' : ''}
             />
+
+            <ErrorMessage name={name} component={FormFeedback} />
         </FormGroup>
     )
 }
