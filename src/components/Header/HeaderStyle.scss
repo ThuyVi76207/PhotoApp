@@ -1,0 +1,23 @@
+.header {
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__link {
+        color: #000;
+        transition: all 0.25s ease-in-out 0s;
+        text-decoration: none;
+
+        &--active,
+        &:hover {
+            text-decoration: none;
+            color: rgb(248, 141, 20);
+        }
+    }
+}

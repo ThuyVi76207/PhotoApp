@@ -1,0 +1,18 @@
+.banner {
+    display: flex;
+    flex-flow: row wrap;
+    height: 25rem;
+    justify-content: center;
+    align-items: center;
+
+
+    background-image: url('../../assets/images/banner1.webp');
+    background-size: cover;
+    background-position: center;
+
+
+    &__title {
+        color: rgb(244, 160, 97);
+        font-weight: bold;
+    }
+}
