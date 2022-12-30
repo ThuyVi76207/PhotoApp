@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FormGroup } from "reactstrap";
+import { Button, FormGroup, Spinner } from "reactstrap";
 import PropTypes from 'prop-types';
 // import Select from 'react-select';
 // import Images from "constants/images";
@@ -21,13 +21,13 @@ PhotoForm.defaultProps = {
 }
 
 function PhotoForm(props) {
-    const { onSubmit } = props;
+    const { onSubmit, initialValues, isAddMode } = props;
 
-    const initialValues = {
-        title: '',
-        categoryId: null,
-        photo: '',
-    };
+    // const initialValues = {
+    //     title: '',
+    //     categoryId: null,
+    //     photo: '',
+    // };
     //Định nghĩa Validation với Yup. Do initialValues là object nên định nghĩa Yup cũng là một object
     //required tức là bắt buộc nhập.
     //Khi mà initialValues thay đổi thì nó lấy schema ra check có valid hay invavid
@@ -50,7 +50,7 @@ function PhotoForm(props) {
         >
             {formikProps => {
                 //do something here..
-                const { values, errors, touched } = formikProps;
+                const { values, errors, touched, isSubmitting } = formikProps;
                 console.log({ values, errors, touched });
 
                 return (
@@ -97,7 +97,12 @@ function PhotoForm(props) {
                             </div>
                         </FormGroup> */}
                         <FormGroup>
-                            <Button color="primary">Add to album</Button>
+                            <Button color={isAddMode ? "primary" : "success"}>
+                                {isSubmitting && <Spinner size='sm' />}
+                                {' '}
+                                {isAddMode ? 'Add to album' : 'Edit photo Form'}
+
+                            </Button>
                         </FormGroup>
                     </Form>
                 )

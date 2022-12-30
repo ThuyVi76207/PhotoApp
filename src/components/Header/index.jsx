@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Col, Container, Row } from 'reactstrap'
 
@@ -7,8 +7,19 @@ import './HeaderStyle.scss';
 Header.prototype = {};
 function Header() {
     const [activeHeader, setactiveHeader] = useState(false);
+
+    const [isSroll, setIsSroll] = useState(false);
+    useEffect(() => {
+        const handleSroll = () => {
+            const isSrolledFarFromTop = window.scrollY > 50;
+            console.log('Sroll: ', isSrolledFarFromTop)
+            setIsSroll(isSrolledFarFromTop);
+        }
+        window.addEventListener('scroll', handleSroll);
+        return () => window.removeEventListener('scroll', handleSroll);
+    }, [])
     return (
-        <header className="header">
+        <header className={isSroll ? "header header__active-sroll" : "header"}>
             <Container>
                 <Row className="justify-content-between">
                     <Col xs='auto'>

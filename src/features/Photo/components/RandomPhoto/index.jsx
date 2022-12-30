@@ -20,7 +20,8 @@ RandomPhoto.prototype = {
 
 const getRandomImageUrl = () => {
     const randomId = Math.trunc(Math.random() * 2000);
-    return `https://picsum.photos/200/300?random=${randomId} `;
+
+    return `https://picsum.photos/id/${randomId}/300/300`;
 }
 
 function RandomPhoto(props) {
@@ -50,7 +51,11 @@ function RandomPhoto(props) {
             </div>
             <div className="random-photo__photo">
                 {
-                    imageUrl && <img src={imageUrl} alt='Ooops ... not found. Please click aganin!!!' />
+                    imageUrl && <img
+                        src={imageUrl}
+                        alt='Ooops ... not found. Please click aganin!!!'
+                        onError={handleRandomPhotoClick}
+                    />
                 }
             </div>
         </div>

@@ -14,7 +14,7 @@ function Photo() {
             <Routes>
                 <Route exact path='/' element={<MainPage />}></Route>
                 <Route exact path='/add' element={<AddEditPage />}></Route>
-                <Route exact path='/photoId' element={<AddEditPage />}></Route>
+                <Route exact path='/:photoId' element={<AddEditPage />}></Route>
                 <Route path="*" element={<NotFound />}></Route>
             </Routes>
 
